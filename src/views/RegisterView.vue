@@ -97,7 +97,7 @@ async function submit() {
               :loading="loading"
               :disabled="!valid"
             >
-              Crear cuenta
+              Crear una cuenta
             </v-btn>
           </v-form>
         </v-card>
