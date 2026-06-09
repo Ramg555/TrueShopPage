@@ -6,7 +6,9 @@ import type {
   Order,
   PagedResult,
   Product,
+  ProductCreateInput,
   ProductFilters,
+  ProductUpdateInput,
   ShippingInfo,
 } from './types'
 
@@ -66,5 +68,18 @@ export const ordersApi = {
   },
   get(id: number) {
     return apiClient.get<Order>(`/orders/${id}`).then((r) => r.data)
+  },
+}
+
+// ── Admin (solo rol Admin) ──
+export const adminApi = {
+  createProduct(input: ProductCreateInput) {
+    return apiClient.post<Product>('/products', input).then((r) => r.data)
+  },
+  updateProduct(id: number, input: ProductUpdateInput) {
+    return apiClient.put<Product>(`/products/${id}`, input).then((r) => r.data)
+  },
+  deleteProduct(id: number) {
+    return apiClient.delete(`/products/${id}`)
   },
 }
