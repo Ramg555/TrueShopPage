@@ -1,0 +1,86 @@
+:root {
+  --ts-font-sans: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --ts-font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  font-family: var(--ts-font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.v-application {
+  font-family: var(--ts-font-sans) !important;
+}
+
+/* Tipografía de marca / títulos */
+.font-display {
+  font-family: var(--ts-font-display) !important;
+  letter-spacing: 0.5px;
+}
+
+.brand-title {
+  font-family: var(--ts-font-display);
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.tracking-wide {
+  letter-spacing: 2px;
+}
+
+.tracking-wider {
+  letter-spacing: 4px;
+}
+
+/* Realce sutil al pasar el cursor por tarjetas de producto */
+.product-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+}
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12) !important;
+}
+
+.product-image {
+  transition: transform 0.5s ease;
+}
+.product-card:hover .product-image {
+  transform: scale(1.04);
+}
+
+/* Línea divisoria fina estilo editorial */
+.hairline {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.12);
+  border: 0;
+}
+
+/* Hover de enlaces del navbar */
+.nav-link {
+  position: relative;
+  text-decoration: none;
+  letter-spacing: 1px;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.25s ease;
+}
+.nav-link:hover::after,
+.nav-link.router-link-active::after {
+  width: 100%;
+}
