@@ -3,6 +3,7 @@ import { onMounted, ref } from 'vue'
 import { catalogApi, adminApi } from '@/api/services'
 import { getErrorMessage } from '@/api/client'
 import { formatPrice } from '@/utils/format'
+import { SIZES } from '@/utils/sizes'
 import type {
   Category,
   Product,
@@ -57,6 +58,9 @@ const priceRules = [
   (v: number | null) => (v !== null && v > 0) || 'El precio debe ser mayor a 0',
 ]
 const categoryRules = [(v: number | null) => v !== null || 'La categoría es obligatoria']
+
+// Opciones de talla como string[] para que el v-model (string) sea compatible.
+const sizeOptions: readonly string[] = SIZES
 
 const tableHeaders = [
   { title: '', key: 'imageUrl', sortable: false, width: 56 },
@@ -220,6 +224,14 @@ onMounted(async () => {
           <v-img :src="item.imageUrl" :alt="item.name" cover />
         </v-avatar>
       </template>
+      <template #[`item.name`]="{ item }">
+        <router-link
+          :to="`/products/${item.id}`"
+          class="text-primary text-decoration-none font-weight-medium"
+        >
+          {{ item.name }}
+        </router-link>
+      </template>
       <template #[`item.price`]="{ item }">
         {{ formatPrice(item.price) }}
       </template>
@@ -294,7 +306,13 @@ onMounted(async () => {
                 :key="i"
                 class="d-flex ga-2 align-center mb-2"
               >
-                <v-text-field v-model="variant.size" label="Talla" hide-details density="compact" />
+                <v-select
+                  v-model="variant.size"
+                  :items="sizeOptions"
+                  label="Talla"
+                  hide-details
+                  density="compact"
+                />
                 <v-text-field v-model="variant.color" label="Color" hide-details density="compact" />
                 <v-text-field
                   v-model.number="variant.stockQuantity"
