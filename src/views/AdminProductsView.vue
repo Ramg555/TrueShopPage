@@ -181,12 +181,14 @@ async function confirmDelete() {
 }
 
 onMounted(async () => {
+  // fetchProducts limpia error al iniciar, así que cargamos categorías después
+  // para no perder un posible error al cargar el catálogo de categorías.
+  await fetchProducts()
   try {
     categories.value = await catalogApi.listCategories()
   } catch (e) {
     error.value = getErrorMessage(e, 'No se pudieron cargar las categorías.')
   }
-  await fetchProducts()
 })
 </script>
 
