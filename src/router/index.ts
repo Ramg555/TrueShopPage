@@ -42,6 +42,12 @@ const router = createRouter({
       meta: { requiresAuth: true },
     },
     {
+      path: '/admin/products',
+      name: 'admin-products',
+      component: () => import('@/views/AdminProductsView.vue'),
+      meta: { requiresAuth: true, requiresAdmin: true },
+    },
+    {
       path: '/login',
       name: 'login',
       component: () => import('@/views/LoginView.vue'),
@@ -60,10 +66,14 @@ const router = createRouter({
 })
 
 // Guard de autenticación: rutas con meta.requiresAuth exigen sesión.
+// Rutas con meta.requiresAdmin además exigen rol de administrador.
 router.beforeEach((to) => {
   const auth = useAuthStore()
   if (to.meta.requiresAuth && !auth.isAuthenticated) {
     return { name: 'login', query: { redirect: to.fullPath } }
+  }
+  if (to.meta.requiresAdmin && !auth.isAdmin) {
+    return { name: 'home' }
   }
   return true
 })
