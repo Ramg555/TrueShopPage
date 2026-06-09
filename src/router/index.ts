@@ -1,6 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 
+// Tipa los campos de `meta` usados por el guard de navegación.
+declare module 'vue-router' {
+  interface RouteMeta {
+    requiresAuth?: boolean
+    requiresAdmin?: boolean
+  }
+}
+
 const router = createRouter({
   history: createWebHistory(),
   scrollBehavior() {

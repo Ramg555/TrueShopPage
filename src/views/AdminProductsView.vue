@@ -245,6 +245,9 @@ onMounted(async () => {
         </v-card-title>
         <v-divider />
         <v-card-text>
+          <v-alert v-if="error" type="error" variant="tonal" class="mb-4" density="compact">
+            {{ error }}
+          </v-alert>
           <v-form v-model="valid" @submit.prevent="save">
             <v-text-field v-model="form.name" label="Nombre" :rules="nameRules" class="mb-2" />
             <v-textarea v-model="form.description" label="Descripción" rows="3" class="mb-2" />
@@ -347,6 +350,9 @@ onMounted(async () => {
       <v-card rounded="lg">
         <v-card-title class="font-display">Eliminar producto</v-card-title>
         <v-card-text>
+          <v-alert v-if="error" type="error" variant="tonal" class="mb-4" density="compact">
+            {{ error }}
+          </v-alert>
           ¿Seguro que deseas eliminar
           <strong>{{ deleteTarget?.name }}</strong>? Esta acción no se puede deshacer.
         </v-card-text>
