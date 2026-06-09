@@ -5,6 +5,7 @@ import { catalogApi } from '@/api/services'
 import { getErrorMessage } from '@/api/client'
 import type { Product, Variant } from '@/api/types'
 import { formatPrice } from '@/utils/format'
+import { sizeRank } from '@/utils/sizes'
 import { useAuthStore } from '@/stores/auth'
 import { useCartStore } from '@/stores/cart'
 
@@ -36,7 +37,9 @@ const colors = computed(() => {
 
 const sizesForColor = computed(() => {
   if (!product.value || !selectedColor.value) return []
-  return product.value.variants.filter((v) => v.color === selectedColor.value)
+  return product.value.variants
+    .filter((v) => v.color === selectedColor.value)
+    .sort((a, b) => sizeRank(a.size) - sizeRank(b.size))
 })
 
 const selectedVariant = computed<Variant | null>(() => {

@@ -110,3 +110,32 @@ export interface ShippingInfo {
   shippingZipCode: string
   shippingPhone: string
 }
+
+// ── Admin: entradas para crear/actualizar productos ──
+export interface VariantInput {
+  size: string
+  color: string
+  stockQuantity: number
+}
+
+export interface ProductCreateInput {
+  name: string
+  description: string
+  price: number
+  brand: string
+  material: string
+  imageUrl: string
+  categoryId: number
+  variants: VariantInput[]
+}
+
+export interface ProductUpdateInput {
+  name: string
+  description: string
+  price: number
+  brand: string
+  material: string
+  imageUrl: string
+  categoryId: number
+  isActive: boolean
+}

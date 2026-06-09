@@ -2,6 +2,7 @@
 import { onMounted, ref, watch } from 'vue'
 import { catalogApi } from '@/api/services'
 import type { Category, Product, ProductFilters } from '@/api/types'
+import { SIZES } from '@/utils/sizes'
 import ProductCard from '@/components/ProductCard.vue'
 
 const products = ref<Product[]>([])
@@ -19,7 +20,7 @@ const filters = ref<ProductFilters>({
   pageSize: 12,
 })
 
-const sizes = ['S', 'M', 'L', 'XL', 'XXL']
+const sizes = SIZES
 const sortOptions = [
   { title: 'Más nuevos', value: 'newest' },
   { title: 'Precio: menor a mayor', value: 'price_asc' },
