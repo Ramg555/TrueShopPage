@@ -80,12 +80,12 @@ function logout() {
             <v-list-item :title="auth.displayName" :subtitle="auth.user?.email" />
             <v-divider />
             <v-list-item to="/orders" title="Mis pedidos" prepend-icon="mdi-package-variant-closed" />
-            <v-list-item
-              v-if="auth.isAdmin"
-              to="/admin/products"
-              title="Administración"
-              prepend-icon="mdi-cog-outline"
-            />
+            <template v-if="auth.isAdmin">
+              <v-divider />
+              <v-list-subheader>Administración</v-list-subheader>
+              <v-list-item to="/admin/products" title="Productos" prepend-icon="mdi-tshirt-crew-outline" />
+              <v-list-item to="/admin/orders" title="Pedidos" prepend-icon="mdi-clipboard-list-outline" />
+            </template>
             <v-list-item title="Cerrar sesión" prepend-icon="mdi-logout" @click="logout" />
           </v-list>
         </v-menu>
@@ -113,13 +113,21 @@ function logout() {
       />
       <template v-if="auth.isAuthenticated">
         <v-list-item to="/orders" title="Mis pedidos" @click="drawer = false" />
-        <v-list-item
-          v-if="auth.isAdmin"
-          to="/admin/products"
-          title="Administración"
-          prepend-icon="mdi-cog-outline"
-          @click="drawer = false"
-        />
+        <template v-if="auth.isAdmin">
+          <v-list-subheader>Administración</v-list-subheader>
+          <v-list-item
+            to="/admin/products"
+            title="Productos"
+            prepend-icon="mdi-tshirt-crew-outline"
+            @click="drawer = false"
+          />
+          <v-list-item
+            to="/admin/orders"
+            title="Pedidos"
+            prepend-icon="mdi-clipboard-list-outline"
+            @click="drawer = false"
+          />
+        </template>
         <v-divider class="my-2" />
         <v-list-item title="Cerrar sesión" prepend-icon="mdi-logout" @click="logout" />
       </template>
