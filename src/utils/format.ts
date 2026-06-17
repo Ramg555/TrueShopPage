@@ -35,3 +35,6 @@ export function orderStatusMeta(status: string): { label: string; color: string 
       return { label: status, color: 'secondary' }
   }
 }
+
+// Estados válidos de un pedido, en orden de avance del flujo.
+export const ORDER_STATUSES = ['Pending', 'Paid', 'Shipped', 'Delivered', 'Cancelled'] as const

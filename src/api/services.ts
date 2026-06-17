@@ -82,4 +82,12 @@ export const adminApi = {
   deleteProduct(id: number) {
     return apiClient.delete(`/products/${id}`)
   },
+  listAllOrders(status?: string) {
+    return apiClient
+      .get<Order[]>('/orders/all', { params: status ? { status } : {} })
+      .then((r) => r.data)
+  },
+  updateOrderStatus(id: number, status: string) {
+    return apiClient.put<Order>(`/orders/${id}/status`, { status }).then((r) => r.data)
+  },
 }
